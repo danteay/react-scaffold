@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const path = require('path');
 const mapp = require('./mapp.config');
 const webpack = require('webpack');
@@ -49,12 +50,6 @@ module.exports = {
   },
   plugins: plugins,
   resolve: {
-    alias: {
-      src: path.resolve(__dirname, 'src/'),
-      'mapp-data': path.resolve(__dirname, mapp.dataFolderPath),
-      react: 'preact/compat',
-      'react-dom': 'preact/compat',
-    },
     modules: [path.join(__dirname, 'node_modules'), path.join(__dirname, 'libs'), path.join(__dirname, 'src')],
     extensions: ['.jsx', '.js'],
     symlinks: false,
@@ -107,7 +102,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(js|jsx|vue|ts|tsx|mjs)$/,
+        test: /\.(js|jsx)$/,
         include: [
           path.resolve(__dirname, 'src'),
           path.resolve(__dirname, 'test'),
@@ -130,20 +125,6 @@ module.exports = {
                 '@babel/plugin-proposal-object-rest-spread',
                 'babel-plugin-syntax-dynamic-import',
                 [
-                  'babel-plugin-transform-react-jsx',
-                  {
-                    pragma: 'h',
-                  },
-                ],
-                [
-                  'babel-plugin-jsx-pragmatic',
-                  {
-                    module: 'preact',
-                    export: 'h',
-                    import: 'h',
-                  },
-                ],
-                [
                   '@babel/plugin-proposal-class-properties',
                   {
                     spec: true,
@@ -163,26 +144,7 @@ module.exports = {
               ],
             },
           },
-        ],
-      },
-      {
-        test: /\.css$/,
-        include: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'libs')],
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.css$/,
-        include: [path.resolve(__dirname, 'src')],
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2,
-              modules: true,
-              localIdentName: '[name]__[local]___[hash:base64:5]',
-            },
-          },
+          'eslint-loader'
         ],
       },
       {
@@ -198,89 +160,5 @@ module.exports = {
       },
     ],
   },
-  // target: 'web',
-  // entry: [
-  //   SRC_DIR + '/index.jsx',
-  // ],
-  // output: {
-  //   path: DIST_DIR,
-  //   filename: 'bundle.js',
-  //   publicPath: '/'
-  // },
-  // module: {
-  //   rules: [
-  //     {
-  //       test: /\.(js|jsx)$/,
-  //       exclude: /node_modules/,
-  //       use: {
-  //         loader: 'babel-loader'
-  //       }
-  //     },
-  //     {
-  //       test: /\.(html)$/,
-  //       exclude: /node_modules/,
-  //       use: {
-  //         loader: 'html-loader',
-  //         options: {minimize: true}
-  //       }
-  //     },
-  //     {
-  //       test: /\.s[ac]ss$/i,
-  //       use: [
-  //         // Creates `style` nodes from JS strings
-  //         'style-loader',
-  //         // Translates CSS into CommonJS
-  //         'css-loader',
-  //         // Compiles Sass to CSS
-  //         'sass-loader',
-  //       ],
-  //     },
-  //   ]
-  // },
-  // resolve: {
-  //   alias: {
-  //     src: path.resolve(__dirname, 'src/'),
-  //     react: 'preact/compat',
-  //     'react-dom': 'preact/compat',
-  //   },
-  //   modules: [path.join(__dirname, 'node_modules'), path.join(__dirname, 'libs'), path.join(__dirname, 'src')],
-  //   extensions: ['.jsx', '.js'],
-  //   symlinks: false,
-  // },
-  // plugins: plugins,
 
-  // devServer: {
-  //   contentBase: [DIST_DIR],
-  //   inline: true,
-  //   compress: false,
-  //   https: false,
-  //   host: '0.0.0.0',
-  //   port: 3000,
-  //   publicPath: '/',
-  //   disableHostCheck: true,
-  //   historyApiFallback: {
-  //     index: '/index.html',
-  //   },
-  //   watchContentBase: true,
-  //   watchOptions: {
-  //     poll: true,
-  //     ignored: /node_modules/,
-  //   },
-  //   stats: {
-  //     colors: true,
-  //     hash: false,
-  //     version: false,
-  //     timings: true,
-  //     assets: true,
-  //     chunks: false,
-  //     modules: false,
-  //     reasons: false,
-  //     children: false,
-  //     source: false,
-  //     errors: true,
-  //     errorDetails: true,
-  //     warnings: false,
-  //     publicPath: true,
-  //   },
-  // },
 }

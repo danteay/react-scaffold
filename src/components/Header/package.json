@@ -1,6 +1,6 @@
 {
-    "name": "home",
+    "name": "header",
     "version": "0.0.0",
     "private": true,
-    "main": "./Home.jsx"
+    "main": "./Header.jsx"
   }

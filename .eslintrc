@@ -1,0 +1,10 @@
+{
+  "parser": "babel-eslint",
+  "plugins": [
+    "react",
+    "prettier"
+  ],
+  "rules": {
+    "no-undef": [ 1 ]
+  }
+}
