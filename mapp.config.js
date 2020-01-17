@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 module.exports = {
   port: 8000,
   https: false,
