@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import configs from './../../configs'
+import config from './../../config'
 import Header from './../Header'
 
 
@@ -17,7 +17,7 @@ class Layout extends Component {
   render() {
     return (
       <>
-        <Header title={configs.siteTitle}/>
+        <Header title={config.siteTitle}/>
 
         <div className="container">
           <main>
