@@ -1,31 +1,81 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
+/* eslint-disable no-undef */
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { UserContext } from './../../context';
+import config from './../../config';
 
-import './Header.sass'
+import './Header.sass';
 
-class Header extends Component {
-  constructor(props) {
-    super(props)
-  }
+const Header = props => {
+  const { user, setUser } = useContext(UserContext);
 
-  render() {
-    const {title} = this.props
+  const handleBurgerClick = e => {
+    let target = document.querySelector('#nav-actions');
+    target.classList.toggle('is-active');
+  };
 
-    return (
-      <header>
-        <div className="header-title">
-          <h1>
-            <Link to="/">{title}</Link>
-          </h1>
+  const handleLogout = e => {
+    localStorage.removeItem('user');
+    setUser({ isLogin: false });
+
+    if (props.history) {
+      props.history.push('/login');
+    }
+  };
+
+  return (
+    <nav className="navbar" role="navigation" aria-label="main navigation">
+      <div className="navbar-brand">
+        <Link className="navbar-item" to="/">
+          {config.siteTitle}
+        </Link>
+
+        <a
+          role="button"
+          className="navbar-burger burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="nav-actions"
+          onClick={handleBurgerClick}
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="nav-actions" className="navbar-menu">
+        <div className="navbar-start">
+          {user.isLogin ? (
+            <div className="navbar-item is-hoverable">
+              <a className="navbar-link">Actions</a>
+              <div class="navbar-dropdown">
+                <Link className="navbar-item" to="/">
+                  Test
+                </Link>
+              </div>
+            </div>
+          ) : null}
         </div>
-      </header>
-    )
-  }
-}
+        <div className="navbar-end">
+          <div className="navbar-item">
+            <div className="buttons">
+              {user.isLogin ? (
+                <a onClick={handleLogout} className="button is-light">
+                  Log-out
+                </a>
+              ) : null}
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+};
 
 Header.propTypes = {
-  'title': PropTypes.string
-}
+  title: PropTypes.string,
+};
 
-export default Header
+export default Header;

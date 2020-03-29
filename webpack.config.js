@@ -115,12 +115,6 @@ module.exports = {
             options: {
               cacheDirectory: true,
               plugins: [
-                [
-                  'fast-async',
-                  {
-                    spec: true,
-                  },
-                ],
                 ['@babel/plugin-proposal-decorators', { legacy: true }],
                 '@babel/plugin-proposal-object-rest-spread',
                 'babel-plugin-syntax-dynamic-import',

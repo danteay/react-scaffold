@@ -1,36 +1,26 @@
 /* eslint-disable no-undef */
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import config from './../../config'
-import Header from './../Header'
+import config from './../../config';
+import Header from './../Header';
 
+import './Layout.sass';
 
-import './Layout.sass'
+const Layout = props => {
+  return (
+    <>
+      <Header title={config.siteTitle} />
 
-class Layout extends Component {
-
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
-    return (
-      <>
-        <Header title={config.siteTitle}/>
-
-        <div className="container">
-          <main>
-            {this.props.children}
-          </main>
-        </div>
-      </>
-    )
-  }
-}
+      <div className="container">
+        <main>{props.children}</main>
+      </div>
+    </>
+  );
+};
 
 Layout.propTypes = {
-  'children': PropTypes.node.isRequired
-}
+  children: PropTypes.node.isRequired,
+};
 
-export default Layout
+export default Layout;

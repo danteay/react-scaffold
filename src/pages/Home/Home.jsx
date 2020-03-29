@@ -1,14 +1,18 @@
-import React, { Component } from 'react'
-import Layout from './../../components/Layout'
+import React from 'react';
+import Layout from './../../components/Layout';
 
-import './Home.sass'
+import { useSession } from './../../hooks';
 
-export default class Home extends Component {
-  render() {
-    return (
-      <Layout>
-        <h1 className="title is-1">Hola mundo</h1>
-      </Layout>
-    )
-  }
-}
+import './Home.sass';
+
+const Home = props => {
+  useSession(props.history);
+
+  return (
+    <Layout>
+      <h1 className="title is-1">Hola mundo</h1>
+    </Layout>
+  );
+};
+
+export default Home;

@@ -1,24 +1,26 @@
-import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import React, { useState, useContext } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-import Home from './pages/Home'
+import Home from './pages/Home';
+import Login from './pages/Login';
 
-import './App.sass'
+import { UserContext } from './context';
+
+import './App.sass';
 
 const App = () => {
+  const [user, setUser] = useState({ isLogin: false });
+
   return (
     <Router>
       <Switch>
-        <Route path="/" component={Home} />
+        <UserContext.Provider value={{ user, setUser }}>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+        </UserContext.Provider>
       </Switch>
     </Router>
-  )
-}
+  );
+};
 
-export default App
-
+export default App;

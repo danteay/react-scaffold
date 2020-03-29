@@ -1,13 +1,9 @@
-# React APP Scafold
-
-## Start
+# React APP Scaffold
 
 ```bash
-yarn start
-```
+# For development
+npm run dev
 
-## Build
-
-```bash
-yarn build
+# For production
+npm run start
 ```
